@@ -54,18 +54,29 @@ const getPunchDataFromBiometricDevice = async (req, res, status) => {
     console.log(response.data);
     
 
-    const punchData = response.data.InOutPunchData.filter(entry => entry.Status === 'P');
-     // Save punch-in and punch-out data in the database
-     const attendanceEntries = punchData.map(entry => ({
-      inTime: entry.INTime,
-      outTime: entry.OUTTime,
-      workTime: entry.WorkTime,
-      user: entry.Empcode, 
-      status:entry.Status,
-      name:entry.Name,
-      date:entry.DateString
+    // const punchData = response.data.InOutPunchData.filter(entry => entry.Status === 'P');
+    //  // Save punch-in and punch-out data in the database
+    //  const attendanceEntries = punchData.map(entry => ({
+    //   inTime: entry.INTime,
+    //   outTime: entry.OUTTime,
+    //   workTime: entry.WorkTime,
+    //   user: entry.Empcode, 
+    //   status:entry.Status,
+    //   name:entry.Name,
+    //   date:entry.DateString
 
-    }));
+    // }));
+    const punchData = response.data.InOutPunchData;
+
+const attendanceEntries = punchData.map(entry => ({
+    inTime: entry.INTime,
+    outTime: entry.OUTTime,
+    workTime: entry.WorkTime,
+    user: entry.Empcode,
+    status: entry.Status,
+    name: entry.Name,
+    date: entry.DateString
+}));
     console.log(attendanceEntries);
 
 
